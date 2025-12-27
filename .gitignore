@@ -1,0 +1,31 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Azure
+*.env
+*.key
+*secret*
+local.settings.json
+
+# Data (大文件不提交)
+*.csv
+!*sample*.csv
+
+# Logs
+*.log
