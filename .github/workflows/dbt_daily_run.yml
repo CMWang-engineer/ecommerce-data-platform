@@ -1,0 +1,38 @@
+name: Daily dbt Run
+
+on:
+  schedule:
+    - cron: '0 2 * * *'  # 每天凌晨 2 点运行
+  workflow_dispatch:      # 允许我们手动点击运行
+
+jobs:
+  build-and-run:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          pip install dbt-duckdb
+
+      - name: Download Data and Run dbt
+        env:
+          AZURE_STORAGE_CONNECTION_STRING: ${{ secrets.AZURE_STORAGE_CONNECTION_STRING }}
+          STORAGE_NAME: ${{ secrets.AZURE_STORAGE_NAME }}
+        run: |
+          # 给脚本权限并运行
+          chmod +x ./run_dbt_azure_fixed.sh
+          ./run_dbt_azure_fixed.sh
+          
+      - name: Upload Analysis Result
+        uses: actions/upload-artifact@v4
+        with:
+          name: dbt-analysis-db
+          path: ecommerce_dbt/target/dbt_local.duckdb
