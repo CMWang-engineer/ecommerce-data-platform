@@ -23,12 +23,13 @@ jobs:
           pip install dbt-duckdb
 
       - name: Download Data and Run dbt
+        working-directory: ./ecommerce_dbt
         env:
           AZURE_STORAGE_CONNECTION_STRING: ${{ secrets.AZURE_STORAGE_CONNECTION_STRING }}
           STORAGE_NAME: ${{ secrets.AZURE_STORAGE_NAME }}
         run: |
           # 给脚本权限并运行
-          chmod +x ./run_dbt_azure_fixed.sh
+          chmod +x run_dbt_azure_fixed.sh
           ./run_dbt_azure_fixed.sh
           
       - name: Upload Analysis Result
