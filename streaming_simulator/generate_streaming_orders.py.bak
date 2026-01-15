@@ -1,0 +1,66 @@
+from datetime import datetime, timedelta
+import random
+import os
+import pandas as pd
+import pyarrow as pa
+import pyarrow.parquet as pq
+from faker import Faker
+
+fake = Faker()
+random.seed(42)
+
+BASE_OUTPUT = "./output"
+
+def generate_one_hour(hour_offset: int, num_orders: int):
+    now = datetime.now()
+    target = now - timedelta(hours=hour_offset)
+    base = target.replace(minute=0, second=0, microsecond=0)
+
+    records = []
+    for i in range(num_orders):
+        ts = base + timedelta(
+            minutes=random.randint(0, 59),
+            seconds=random.randint(0, 59)
+        )
+        records.append({
+            "order_id": f"STREAM_{base.strftime('%Y%m%d%H')}_{i:05d}",
+            "customer_id": random.randint(1, 10000),
+            "total_amount": round(random.uniform(20, 800), 2),
+            "order_ts": ts,
+            "year": ts.year,
+            "month": ts.month,
+            "day": ts.day,
+            "hour": ts.hour
+        })
+
+    df = pd.DataFrame(records)
+
+    out_dir = (
+        f"{BASE_OUTPUT}/"
+        f"year={df.year.iloc[0]}/"
+        f"month={df.month.iloc[0]}/"
+        f"day={df.day.iloc[0]}/"
+        f"hour={df.hour.iloc[0]}"
+    )
+    os.makedirs(out_dir, exist_ok=True)
+
+    pq.write_table(
+        pa.Table.from_pandas(df),
+        f"{out_dir}/data.parquet"
+    )
+
+    print(f"✅ 生成 {len(df)} 行 -> {out_dir}/data.parquet")
+
+
+def main():
+    # 过去 6 小时
+    for h in range(6, 0, -1):
+        generate_one_hour(h, random.randint(50, 150))
+
+    # 当前小时
+    generate_one_hour(0, 100)
+
+
+if __name__ == "__main__":
+    main()
+

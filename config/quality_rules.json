@@ -1,0 +1,108 @@
+{
+  "quality_rules": [
+    {
+      "table_name": "customers",
+      "rules": [
+        {
+          "rule_id": "cust_001",
+          "rule_name": "customer_id_not_null",
+          "column": "customer_id",
+          "check_type": "completeness",
+          "condition": "IS NOT NULL",
+          "threshold": 1.0,
+          "description": "Customer ID must be present"
+        },
+        {
+          "rule_id": "cust_002",
+          "rule_name": "email_format",
+          "column": "email",
+          "check_type": "accuracy",
+          "pattern": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$",
+          "threshold": 0.95,
+          "description": "Email must be valid format"
+        },
+        {
+          "rule_id": "cust_003",
+          "rule_name": "customer_id_unique",
+          "column": "customer_id",
+          "check_type": "uniqueness",
+          "threshold": 0.999,
+          "description": "Customer ID must be unique"
+        },
+        {
+          "rule_id": "cust_004",
+          "rule_name": "phone_completeness",
+          "column": "phone",
+          "check_type": "completeness",
+          "condition": "IS NOT NULL",
+          "threshold": 0.80,
+          "description": "Phone should be present in 80% of records"
+        }
+      ]
+    },
+    {
+      "table_name": "orders",
+      "rules": [
+        {
+          "rule_id": "ord_001",
+          "rule_name": "order_id_not_null",
+          "column": "order_id",
+          "check_type": "completeness",
+          "condition": "IS NOT NULL",
+          "threshold": 1.0,
+          "description": "Order ID must be present"
+        },
+        {
+          "rule_id": "ord_002",
+          "rule_name": "customer_id_not_null",
+          "column": "customer_id",
+          "check_type": "completeness",
+          "condition": "IS NOT NULL",
+          "threshold": 1.0,
+          "description": "Customer ID must be present"
+        },
+        {
+          "rule_id": "ord_003",
+          "rule_name": "order_date_freshness",
+          "column": "order_date",
+          "check_type": "timeliness",
+          "max_delay_hours": 24,
+          "threshold": 0.95,
+          "description": "Order date should be within 24 hours"
+        },
+        {
+          "rule_id": "ord_004",
+          "rule_name": "total_amount_positive",
+          "column": "total_amount",
+          "check_type": "validity",
+          "condition": "> 0",
+          "threshold": 1.0,
+          "description": "Total amount must be positive"
+        }
+      ]
+    },
+    {
+      "table_name": "products",
+      "rules": [
+        {
+          "rule_id": "prod_001",
+          "rule_name": "product_id_not_null",
+          "column": "product_id",
+          "check_type": "completeness",
+          "condition": "IS NOT NULL",
+          "threshold": 1.0,
+          "description": "Product ID must be present"
+        },
+        {
+          "rule_id": "prod_002",
+          "rule_name": "price_positive",
+          "column": "price",
+          "check_type": "validity",
+          "condition": "> 0",
+          "threshold": 1.0,
+          "description": "Price must be positive"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "files": [
+    {
+      "sourceName": "customers.csv",
+      "targetFolder": "customers",
+      "targetName": "customers.csv"
+    },
+    {
+      "sourceName": "products.csv",
+      "targetFolder": "products",
+      "targetName": "products.csv"
+    },
+    {
+      "sourceName": "orders.csv",
+      "targetFolder": "orders",
+      "targetName": "orders.csv"
+    },
+    {
+      "sourceName": "order_items.csv",
+      "targetFolder": "order_items",
+      "targetName": "order_items.csv"
+    }
+  ]
+}

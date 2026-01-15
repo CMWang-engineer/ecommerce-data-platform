@@ -1,0 +1,21 @@
+
+version: 2
+
+sources:
+  - name: silver
+    description: "Silver layer data stored as partitioned parquet files"
+
+    tables:
+      - name: customers_partitioned
+        description: "Customers table"
+
+      - name: orders_partitioned
+        description: "Orders table"
+
+      - name: order_items_partitioned
+        description: "Order items table"
+
+      - name: products_partitioned
+        description: "Products table"
+
+

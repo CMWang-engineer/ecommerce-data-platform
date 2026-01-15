@@ -1,0 +1,2 @@
+"total_rows","customer_id_null_count","customer_id_null_rate","customer_id_distinct_count","customer_id_duplicate_count","customer_id_duplicate_rate","email_null_count","email_null_rate","city_null_rate","country_null_rate","table_name","profile_date","data_source"
+"30000","0","0.00","10000","20000","66.6667","0","0.0","0.0","0.0","customers","2025-12-29 19:28:58","bronze/customers"

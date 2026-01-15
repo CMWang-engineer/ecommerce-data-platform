@@ -1,0 +1,2 @@
+totalRecords,uniqueKeys,duplicateKeys,duplicateRecords,uniquenessRate,duplicateRate,tableName,keyColumn,checkType,checkPassed,qualityScore,checkTimestamp
+30000,10000,10000,20000,33.33,100.0000,customers,customer_id,uniqueness,FAIL,0.3333,2026-01-01 16:37:50

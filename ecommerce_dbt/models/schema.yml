@@ -1,0 +1,35 @@
+version: 2
+
+models:
+  - name: customer_summary
+    description: "客户360度视图汇总表"
+    columns:
+      - name: customer_id
+        description: "客户唯一标识"
+        tests:
+          - unique
+          - not_null
+      - name: total_orders
+        description: "客户总订单数"
+      - name: customer_status
+        description: "客户状态: VIP/Loyal/Active/At Risk/Churned"
+
+  - name: customer_rfm_segments
+    description: "RFM客户分层模型"
+    columns:
+      - name: customer_id
+        tests:
+          - unique
+          - not_null
+      - name: rfm_segment
+        description: "RFM分层: Champions/Loyal/Big Spenders/New/At Risk/Lost"
+
+  - name: product_performance
+    description: "产品销售绩效分析"
+    columns:
+      - name: product_id
+        tests:
+          - unique
+          - not_null
+      - name: product_status
+        description: "产品状态: Top Seller/High Revenue/Slow Moving/Never Sold"

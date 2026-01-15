@@ -1,0 +1,37 @@
+name: 'ecommerce_dbt'
+version: '1.0.0'
+config-version: 2
+
+profile: 'ecommerce_dbt'
+
+model-paths: ["models"]
+analysis-paths: ["analyses"]
+test-paths: ["tests"]
+seed-paths: ["seeds"]
+macro-paths: ["macros"]
+snapshot-paths: ["snapshots"]
+
+target-path: "target"
+clean-targets:
+  - "target"
+  - "dbt_packages"
+
+models:
+  ecommerce_dbt:
+    staging:
+      +materialized: view
+      +schema: staging
+    marts:
+      +materialized: table
+      +schema: marts
+
+vars:
+  # 本地 Silver 数据根路径
+  silver_data_path: "../data/silver"
+
+  # 本地真实目录名（不是云端 _partitioned 名）
+  tables:
+    customers: "customers"
+    products: "products"
+    orders: "orders"
+    order_items: "order_items"

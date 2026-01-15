@@ -1,0 +1,16 @@
+{
+  "rules": [
+    {
+      "rule_id": "cust_001",
+      "column": "customer_id",
+      "check_type": "completeness",
+      "threshold": 1.0
+    },
+    {
+      "rule_id": "cust_002",
+      "column": "email",
+      "check_type": "accuracy",
+      "threshold": 0.95
+    }
+  ]
+}

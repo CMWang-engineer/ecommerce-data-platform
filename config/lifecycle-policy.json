@@ -1,0 +1,36 @@
+{
+  "rules": [
+    {
+      "name": "move-to-cool",
+      "type": "Lifecycle",
+      "definition": {
+        "filters": {
+          "blobTypes": ["blockBlob"],
+          "prefixMatch": ["bronze/", "silver/"]
+        },
+        "actions": {
+          "baseBlob": {
+            "tierToCool": { "daysAfterModificationGreaterThan": 7 },
+            "tierToArchive": { "daysAfterModificationGreaterThan": 30 },
+            "delete": { "daysAfterModificationGreaterThan": 90 }
+          }
+        }
+      }
+    },
+    {
+      "name": "delete-temp-files",
+      "type": "Lifecycle",
+      "definition": {
+        "filters": {
+          "blobTypes": ["blockBlob"],
+          "prefixMatch": ["temp/", "raw-data/"]
+        },
+        "actions": {
+          "baseBlob": {
+            "delete": { "daysAfterModificationGreaterThan": 3 }
+          }
+        }
+      }
+    }
+  ]
+}
