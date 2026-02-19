@@ -30,6 +30,12 @@ Enterprise-grade data platform built over 3 weeks (Day 1-16 completed), demonstr
 ---
 
 ## 🏗️ Architecture
+
+![Architecture Diagram](visualizations/architecture-diagram.png)
+
+*High-level overview of the data platform architecture*
+
+### Data Flow
 ```
 Raw CSV Files → Bronze (Validated) → Silver (Cleaned Parquet) → Gold (Analytics)
                      ↓                       ↓                        ↓
